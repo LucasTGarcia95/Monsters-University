@@ -1,11 +1,15 @@
 import "./App.css";
+import { Routes, Route } from "react-router";
 
 function App() {
-  return (
-    <>
-      <h1>Welcome to FSU</h1>
-    </>
-  );
+  return <Route></Route>;
 }
 
-export default App;
+// (
+// <>
+//  <h1>Welcome to FSU</h1>
+//  </>
+// );
+// }
+
+// export default App;
