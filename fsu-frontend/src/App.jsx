@@ -8,6 +8,7 @@ import Faculty from "./pages/Faculty";
 import FacultyDetail from "./pages/FacultyDetail";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/faculty/:id" element={<FacultyDetail />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
       <Footer />
