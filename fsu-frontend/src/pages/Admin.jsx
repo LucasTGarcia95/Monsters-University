@@ -5,8 +5,14 @@ import {
   getAllDepartments,
   createDepartment,
   deleteDepartment,
+  updateDepartment,
 } from "../api/departments";
-import { getAllFaculty, createFaculty, deleteFaculty } from "../api/faculty";
+import {
+  getAllFaculty,
+  createFaculty,
+  deleteFaculty,
+  updateFaculty,
+} from "../api/faculty";
 import "./Admin.css";
 
 function Admin() {
@@ -19,11 +25,26 @@ function Admin() {
   const [deptDescription, setDeptDescription] = useState("");
   const [deptContact, setDeptContact] = useState("");
 
+  // Department edit state
+  const [editingDept, setEditingDept] = useState(null);
+  const [editDeptName, setEditDeptName] = useState("");
+  const [editDeptDescription, setEditDeptDescription] = useState("");
+  const [editDeptContact, setEditDeptContact] = useState("");
+  const [editDeptImage, setEditDeptImage] = useState("");
+
   // Faculty form state
   const [facName, setFacName] = useState("");
   const [facBio, setFacBio] = useState("");
   const [facContact, setFacContact] = useState("");
   const [facDeptId, setFacDeptId] = useState("");
+
+  // Faculty edit state
+  const [editingFac, setEditingFac] = useState(null);
+  const [editFacName, setEditFacName] = useState("");
+  const [editFacBio, setEditFacBio] = useState("");
+  const [editFacContact, setEditFacContact] = useState("");
+  const [editFacDeptId, setEditFacDeptId] = useState("");
+  const [editFacImage, setEditFacImage] = useState("");
 
   const token = getToken();
 
@@ -47,6 +68,7 @@ function Admin() {
     navigate("/login");
   };
 
+  // Department handlers
   const handleAddDepartment = async () => {
     if (!deptName) return;
     await createDepartment(
@@ -68,6 +90,30 @@ function Admin() {
     fetchData();
   };
 
+  const handleEditDept = (dept) => {
+    setEditingDept(dept.id);
+    setEditDeptName(dept.name);
+    setEditDeptDescription(dept.description);
+    setEditDeptContact(dept.contact_info);
+    setEditDeptImage(dept.banner_image_url || "");
+  };
+
+  const handleUpdateDepartment = async () => {
+    await updateDepartment(
+      editingDept,
+      {
+        name: editDeptName,
+        description: editDeptDescription,
+        contact_info: editDeptContact,
+        banner_image_url: editDeptImage,
+      },
+      token,
+    );
+    setEditingDept(null);
+    fetchData();
+  };
+
+  // Faculty handlers
   const handleAddFaculty = async () => {
     if (!facName) return;
     await createFaculty(
@@ -88,6 +134,31 @@ function Admin() {
 
   const handleDeleteFaculty = async (id) => {
     await deleteFaculty(id, token);
+    fetchData();
+  };
+
+  const handleEditFac = (fac) => {
+    setEditingFac(fac.id);
+    setEditFacName(fac.name);
+    setEditFacBio(fac.bio);
+    setEditFacContact(fac.contact_info);
+    setEditFacDeptId(fac.department_id);
+    setEditFacImage(fac.profile_image_url || "");
+  };
+
+  const handleUpdateFaculty = async () => {
+    await updateFaculty(
+      editingFac,
+      {
+        name: editFacName,
+        bio: editFacBio,
+        contact_info: editFacContact,
+        department_id: editFacDeptId,
+        profile_image_url: editFacImage,
+      },
+      token,
+    );
+    setEditingFac(null);
     fetchData();
   };
 
@@ -129,13 +200,66 @@ function Admin() {
         <ul className="admin-list">
           {departments.map((dept) => (
             <li key={dept.id} className="admin-list-item">
-              <span>{dept.name}</span>
-              <button
-                className="delete-button"
-                onClick={() => handleDeleteDepartment(dept.id)}
-              >
-                Delete
-              </button>
+              {editingDept === dept.id ? (
+                <div className="edit-form">
+                  <input
+                    type="text"
+                    value={editDeptName}
+                    onChange={(e) => setEditDeptName(e.target.value)}
+                    placeholder="Name"
+                  />
+                  <input
+                    type="text"
+                    value={editDeptDescription}
+                    onChange={(e) => setEditDeptDescription(e.target.value)}
+                    placeholder="Description"
+                  />
+                  <input
+                    type="text"
+                    value={editDeptContact}
+                    onChange={(e) => setEditDeptContact(e.target.value)}
+                    placeholder="Contact email"
+                  />
+                  <input
+                    type="text"
+                    value={editDeptImage}
+                    onChange={(e) => setEditDeptImage(e.target.value)}
+                    placeholder="Banner image URL"
+                  />
+                  <div className="edit-buttons">
+                    <button
+                      className="save-button"
+                      onClick={handleUpdateDepartment}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="cancel-button"
+                      onClick={() => setEditingDept(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span>{dept.name}</span>
+                  <div className="item-buttons">
+                    <button
+                      className="edit-button"
+                      onClick={() => handleEditDept(dept)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDeleteDepartment(dept.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
             </li>
           ))}
         </ul>
@@ -181,13 +305,77 @@ function Admin() {
         <ul className="admin-list">
           {faculty.map((fac) => (
             <li key={fac.id} className="admin-list-item">
-              <span>{fac.name}</span>
-              <button
-                className="delete-button"
-                onClick={() => handleDeleteFaculty(fac.id)}
-              >
-                Delete
-              </button>
+              {editingFac === fac.id ? (
+                <div className="edit-form">
+                  <input
+                    type="text"
+                    value={editFacName}
+                    onChange={(e) => setEditFacName(e.target.value)}
+                    placeholder="Name"
+                  />
+                  <input
+                    type="text"
+                    value={editFacBio}
+                    onChange={(e) => setEditFacBio(e.target.value)}
+                    placeholder="Bio"
+                  />
+                  <input
+                    type="text"
+                    value={editFacContact}
+                    onChange={(e) => setEditFacContact(e.target.value)}
+                    placeholder="Contact email"
+                  />
+                  <input
+                    type="text"
+                    value={editFacImage}
+                    onChange={(e) => setEditFacImage(e.target.value)}
+                    placeholder="Profile image URL"
+                  />
+                  <select
+                    value={editFacDeptId}
+                    onChange={(e) => setEditFacDeptId(e.target.value)}
+                  >
+                    <option value="">Select department</option>
+                    {departments.map((dept) => (
+                      <option key={dept.id} value={dept.id}>
+                        {dept.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="edit-buttons">
+                    <button
+                      className="save-button"
+                      onClick={handleUpdateFaculty}
+                    >
+                      Save
+                    </button>
+                    <button
+                      className="cancel-button"
+                      onClick={() => setEditingFac(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <span>{fac.name}</span>
+                  <div className="item-buttons">
+                    <button
+                      className="edit-button"
+                      onClick={() => handleEditFac(fac)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="delete-button"
+                      onClick={() => handleDeleteFaculty(fac.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
             </li>
           ))}
         </ul>
