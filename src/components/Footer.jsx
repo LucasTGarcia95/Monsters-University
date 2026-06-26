@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="footer">
       <p>
-        © 2025 Monsters University | <Link to="/departments">Departments</Link>{" "}
+        © 2026 Monsters University | <Link to="/departments">Departments</Link>{" "}
         | <Link to="/faculty">Faculty</Link>
       </p>
     </footer>

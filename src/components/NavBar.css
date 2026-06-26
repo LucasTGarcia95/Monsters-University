@@ -28,3 +28,19 @@
 .navbar-links a:hover {
   color: #f4d03f;
 }
+
+.navbar-logout {
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.navbar-logout:hover {
+  background-color: #f4d03f;
+  color: #4a0e8f;
+  border-color: #f4d03f;
+}
