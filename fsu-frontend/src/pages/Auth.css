@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 70vh;
+  padding: 2rem;
 }
 
 .auth-card {
@@ -11,13 +12,15 @@
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;
   text-align: center;
 }
 
 .auth-card h1 {
   color: #4a0e8f;
   margin-bottom: 0.5rem;
+  font-size: 1.75rem;
+  white-space: nowrap;
 }
 
 .auth-card p {
