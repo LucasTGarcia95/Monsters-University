@@ -20,25 +20,23 @@ function Admin() {
   const [departments, setDepartments] = useState([]);
   const [faculty, setFaculty] = useState([]);
 
-  // Department form state
   const [deptName, setDeptName] = useState("");
   const [deptDescription, setDeptDescription] = useState("");
   const [deptContact, setDeptContact] = useState("");
+  const [deptImage, setDeptImage] = useState("");
 
-  // Department edit state
   const [editingDept, setEditingDept] = useState(null);
   const [editDeptName, setEditDeptName] = useState("");
   const [editDeptDescription, setEditDeptDescription] = useState("");
   const [editDeptContact, setEditDeptContact] = useState("");
   const [editDeptImage, setEditDeptImage] = useState("");
 
-  // Faculty form state
   const [facName, setFacName] = useState("");
   const [facBio, setFacBio] = useState("");
   const [facContact, setFacContact] = useState("");
   const [facDeptId, setFacDeptId] = useState("");
+  const [facImage, setFacImage] = useState("");
 
-  // Faculty edit state
   const [editingFac, setEditingFac] = useState(null);
   const [editFacName, setEditFacName] = useState("");
   const [editFacBio, setEditFacBio] = useState("");
@@ -68,7 +66,6 @@ function Admin() {
     navigate("/login");
   };
 
-  // Department handlers
   const handleAddDepartment = async () => {
     if (!deptName) return;
     await createDepartment(
@@ -76,12 +73,15 @@ function Admin() {
         name: deptName,
         description: deptDescription,
         contact_info: deptContact,
+        banner_image_url:
+          deptImage || "https://placehold.co/800x300?text=" + deptName,
       },
       token,
     );
     setDeptName("");
     setDeptDescription("");
     setDeptContact("");
+    setDeptImage("");
     fetchData();
   };
 
@@ -113,7 +113,6 @@ function Admin() {
     fetchData();
   };
 
-  // Faculty handlers
   const handleAddFaculty = async () => {
     if (!facName) return;
     await createFaculty(
@@ -122,6 +121,8 @@ function Admin() {
         bio: facBio,
         contact_info: facContact,
         department_id: facDeptId,
+        profile_image_url:
+          facImage || "https://placehold.co/200x200?text=" + facName,
       },
       token,
     );
@@ -129,6 +130,7 @@ function Admin() {
     setFacBio("");
     setFacContact("");
     setFacDeptId("");
+    setFacImage("");
     fetchData();
   };
 
@@ -171,7 +173,6 @@ function Admin() {
         </button>
       </div>
 
-      {/* Departments Section */}
       <section className="admin-section">
         <h2>Departments</h2>
         <div className="admin-form">
@@ -192,6 +193,12 @@ function Admin() {
             placeholder="Contact email"
             value={deptContact}
             onChange={(e) => setDeptContact(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Banner image URL (optional)"
+            value={deptImage}
+            onChange={(e) => setDeptImage(e.target.value)}
           />
           <button className="add-button" onClick={handleAddDepartment}>
             Add Department
@@ -265,7 +272,6 @@ function Admin() {
         </ul>
       </section>
 
-      {/* Faculty Section */}
       <section className="admin-section">
         <h2>Faculty</h2>
         <div className="admin-form">
@@ -286,6 +292,12 @@ function Admin() {
             placeholder="Contact email"
             value={facContact}
             onChange={(e) => setFacContact(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="Profile image URL (optional)"
+            value={facImage}
+            onChange={(e) => setFacImage(e.target.value)}
           />
           <select
             value={facDeptId}
