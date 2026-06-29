@@ -15,9 +15,9 @@ export const createFaculty = async (facultyData, token) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(facultyData)
+    body: JSON.stringify(facultyData),
   });
   return response.json();
 };
@@ -27,9 +27,9 @@ export const updateFaculty = async (id, facultyData, token) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(facultyData)
+    body: JSON.stringify(facultyData),
   });
   return response.json();
 };
@@ -38,8 +38,8 @@ export const deleteFaculty = async (id, token) => {
   const response = await fetch(`${BASE_URL}/faculty/${id}`, {
     method: "DELETE",
     headers: {
-      "Authorization": `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.json();
 };

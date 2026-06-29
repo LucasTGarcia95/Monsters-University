@@ -1,22 +1,23 @@
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { faculty, departments } from "../data";
+import { getFacultyById } from "../api/faculty";
+import { isLoggedIn } from "../api/auth";
 import "./Faculty.css";
 
 function FacultyDetail() {
   const { id } = useParams();
+  const [professor, setProfessor] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const loggedIn = isLoggedIn();
 
-  const professor = faculty.find((p) => p.id === Number(id));
+  useEffect(() => {
+    getFacultyById(id)
+      .then(setProfessor)
+      .finally(() => setLoading(false));
+  }, [id]);
 
-  if (!professor) {
-    return (
-      <div className="faculty-detail-page">
-        <h1>Professor not found</h1>
-        <Link to="/faculty">Back to faculty list</Link>
-      </div>
-    );
-  }
-
-  const department = departments.find((d) => d.id === professor.department_id);
+  if (loading) return <p>Loading...</p>;
+  if (!professor) return <p>Professor not found.</p>;
 
   return (
     <div className="faculty-detail-page">
@@ -31,11 +32,11 @@ function FacultyDetail() {
         />
         <div>
           <h1>{professor.name}</h1>
-          {department && (
+          {professor.department && (
             <p className="faculty-detail-department">
               Department:{" "}
-              <Link to={`/departments/${department.id}`}>
-                {department.name}
+              <Link to={`/departments/${professor.department.id}`}>
+                {professor.department.name}
               </Link>
             </p>
           )}
@@ -46,6 +47,14 @@ function FacultyDetail() {
         <h2>Bio</h2>
         <p>{professor.bio}</p>
       </div>
+      {loggedIn && (
+        <div className="admin-bar" style={{ marginTop: "1.5rem" }}>
+          <span className="admin-badge">⚙️ Admin Mode</span>
+          <Link to="/admin" className="btn-edit">
+            Edit Faculty
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

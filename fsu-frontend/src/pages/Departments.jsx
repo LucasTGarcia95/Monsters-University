@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { departments } from "../data";
+import { getAllDepartments } from "../api/departments";
 import "./Departments.css";
 
 function Departments() {
@@ -8,9 +8,15 @@ function Departments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: swap for getAllDepartments() from ../api/departments when backend is ready
-    setDeptList(departments);
-    setLoading(false);
+    getAllDepartments()
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setDeptList(data);
+        } else if (data) {
+          setDeptList([data]);
+        }
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   if (loading) return <p>Loading departments...</p>;

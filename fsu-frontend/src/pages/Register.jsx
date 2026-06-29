@@ -13,9 +13,9 @@ function Register() {
     e.preventDefault();
     setError("");
     try {
-      const data = await registerUser({ username, password });
-      if (data.token) {
-        saveToken(data.token);
+      const token = await registerUser({ username, password });
+      if (token) {
+        saveToken(token);
         navigate("/admin");
       } else {
         setError("Registration failed. Please try again.");

@@ -1,23 +1,19 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { departments, faculty } from "../data";
+import { getDepartmentById } from "../api/departments";
 import { isLoggedIn } from "../api/auth";
 import "./DepartmentDetail.css";
 
 function DepartmentDetail() {
   const { id } = useParams();
   const [dept, setDept] = useState(null);
-  const [deptFaculty, setDeptFaculty] = useState([]);
   const [loading, setLoading] = useState(true);
   const loggedIn = isLoggedIn();
 
   useEffect(() => {
-    // TODO: swap for getDepartmentById(id) from ../api/departments when backend is ready
-    const found = departments.find((d) => d.id === parseInt(id));
-    const members = faculty.filter((f) => f.department_id === parseInt(id));
-    setDept(found);
-    setDeptFaculty(members);
-    setLoading(false);
+    getDepartmentById(id)
+      .then(setDept)
+      .finally(() => setLoading(false));
   }, [id]);
 
   if (loading) return <p>Loading...</p>;
@@ -61,11 +57,11 @@ function DepartmentDetail() {
 
         <section className="dept-section">
           <h2>Faculty</h2>
-          {deptFaculty.length === 0 ? (
+          {!dept.faculty || dept.faculty.length === 0 ? (
             <p>No faculty members found for this department.</p>
           ) : (
             <div className="faculty-grid">
-              {deptFaculty.map((member) => (
+              {dept.faculty.map((member) => (
                 <Link
                   to={`/faculty/${member.id}`}
                   key={member.id}

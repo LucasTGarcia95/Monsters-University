@@ -13,9 +13,9 @@ function Login() {
     e.preventDefault();
     setError("");
     try {
-      const data = await login({ username, password });
-      if (data.token) {
-        saveToken(data.token);
+      const token = await login({ username, password });
+      if (token && token !== "Invalid username or password.") {
+        saveToken(token);
         navigate("/admin");
       } else {
         setError("Invalid username or password.");

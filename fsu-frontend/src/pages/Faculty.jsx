@@ -1,12 +1,19 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { faculty, departments } from "../data";
+import { getAllFaculty } from "../api/faculty";
 import "./Faculty.css";
 
 function Faculty() {
-  const getDepartmentName = (department_id) => {
-    const department = departments.find((d) => d.id === department_id);
-    return department ? department.name : "Unknown department";
-  };
+  const [facultyList, setFacultyList] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getAllFaculty()
+      .then(setFacultyList)
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p>Loading faculty...</p>;
 
   return (
     <div className="faculty-list-page">
@@ -15,7 +22,7 @@ function Faculty() {
         Meet the monsters shaping the next generation of scarers.
       </p>
       <div className="faculty-grid">
-        {faculty.map((professor) => (
+        {facultyList.map((professor) => (
           <Link
             to={`/faculty/${professor.id}`}
             key={professor.id}
@@ -27,9 +34,6 @@ function Faculty() {
               className="faculty-card-image"
             />
             <h3>{professor.name}</h3>
-            <p className="faculty-card-department">
-              {getDepartmentName(professor.department_id)}
-            </p>
           </Link>
         ))}
       </div>
