@@ -19,6 +19,7 @@ function Admin() {
   const navigate = useNavigate();
   const [departments, setDepartments] = useState([]);
   const [faculty, setFaculty] = useState([]);
+  const [deleting, setDeleting] = useState(null);
 
   const [deptName, setDeptName] = useState("");
   const [deptDescription, setDeptDescription] = useState("");
@@ -86,8 +87,11 @@ function Admin() {
   };
 
   const handleDeleteDepartment = async (id) => {
+    if (deleting) return;
+    setDeleting(id);
     await deleteDepartment(id, token);
-    fetchData();
+    await fetchData();
+    setDeleting(null);
   };
 
   const handleEditDept = (dept) => {
@@ -135,8 +139,11 @@ function Admin() {
   };
 
   const handleDeleteFaculty = async (id) => {
+    if (deleting) return;
+    setDeleting(id);
     await deleteFaculty(id, token);
-    fetchData();
+    await fetchData();
+    setDeleting(null);
   };
 
   const handleEditFac = (fac) => {
@@ -260,9 +267,10 @@ function Admin() {
                     </button>
                     <button
                       className="delete-button"
+                      disabled={deleting === dept.id}
                       onClick={() => handleDeleteDepartment(dept.id)}
                     >
-                      Delete
+                      {deleting === dept.id ? "Deleting..." : "Delete"}
                     </button>
                   </div>
                 </>
@@ -381,9 +389,10 @@ function Admin() {
                     </button>
                     <button
                       className="delete-button"
+                      disabled={deleting === fac.id}
                       onClick={() => handleDeleteFaculty(fac.id)}
                     >
-                      Delete
+                      {deleting === fac.id ? "Deleting..." : "Delete"}
                     </button>
                   </div>
                 </>

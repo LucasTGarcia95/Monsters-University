@@ -12,7 +12,7 @@
 }
 
 .admin-header h1 {
-  color: #4a0e8f;
+  color: #1a3a6b;
 }
 
 .logout-button {
@@ -33,12 +33,13 @@
   background: white;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   margin-bottom: 2rem;
+  border-top: 4px solid #1a3a6b;
 }
 
 .admin-section h2 {
-  color: #4a0e8f;
+  color: #1a3a6b;
   margin-bottom: 1rem;
 }
 
@@ -62,11 +63,11 @@
 .admin-form input:focus,
 .admin-form select:focus {
   outline: none;
-  border-color: #4a0e8f;
+  border-color: #1a3a6b;
 }
 
 .add-button {
-  background-color: #4a0e8f;
+  background-color: #1a3a6b;
   color: white;
   border: none;
   padding: 0.5rem 1.25rem;
@@ -76,7 +77,7 @@
 }
 
 .add-button:hover {
-  background-color: #6a1fbf;
+  background-color: #2a5298;
 }
 
 .admin-list {
@@ -88,8 +89,11 @@
 
 .admin-list-item {
   padding: 0.75rem 1rem;
-  background-color: #f5f5f5;
+  background-color: #f5f0e8;
   border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .item-buttons {
@@ -97,20 +101,8 @@
   gap: 0.5rem;
 }
 
-.admin-list-item > span {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.admin-list-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .edit-button {
-  background-color: #f39c12;
+  background-color: #2a5298;
   color: white;
   border: none;
   padding: 0.3rem 0.75rem;
@@ -120,7 +112,7 @@
 }
 
 .edit-button:hover {
-  background-color: #e67e22;
+  background-color: #4a9eda;
 }
 
 .delete-button {
@@ -157,7 +149,7 @@
 .edit-form input:focus,
 .edit-form select:focus {
   outline: none;
-  border-color: #4a0e8f;
+  border-color: #1a3a6b;
 }
 
 .edit-buttons {

@@ -18,7 +18,7 @@
 .dept-banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  background: linear-gradient(to top, rgba(26, 58, 107, 0.85), transparent);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -32,7 +32,7 @@
 }
 
 .back-link {
-  color: #f4d03f;
+  color: #f4c430;
   text-decoration: none;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
@@ -50,21 +50,21 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #f0e6ff;
-  border: 1px solid #4a0e8f;
+  background: #e8f0fb;
+  border: 1px solid #1a3a6b;
   border-radius: 8px;
   padding: 0.75rem 1rem;
   margin-bottom: 1.5rem;
 }
 
 .admin-badge {
-  color: #4a0e8f;
+  color: #1a3a6b;
   font-weight: bold;
   font-size: 0.9rem;
 }
 
 .btn-edit {
-  background-color: #4a0e8f;
+  background-color: #1a3a6b;
   color: white;
   padding: 0.3rem 0.75rem;
   border-radius: 6px;
@@ -73,7 +73,7 @@
 }
 
 .btn-edit:hover {
-  background-color: #6a1fbf;
+  background-color: #2a5298;
 }
 
 .dept-section {
@@ -81,7 +81,7 @@
 }
 
 .dept-section h2 {
-  color: #4a0e8f;
+  color: #1a3a6b;
   margin-bottom: 0.75rem;
   font-size: 1.3rem;
 }
@@ -92,7 +92,7 @@
 }
 
 .dept-section a {
-  color: #4a0e8f;
+  color: #1a3a6b;
 }
 
 .faculty-grid {
@@ -112,6 +112,7 @@
   text-decoration: none;
   color: inherit;
   transition: transform 0.2s;
+  border-left: 3px solid #1a3a6b;
 }
 
 .faculty-card:hover {
@@ -127,7 +128,7 @@
 
 .faculty-card h3 {
   font-size: 0.95rem;
-  color: #4a0e8f;
+  color: #1a3a6b;
   margin-bottom: 0.2rem;
 }
 

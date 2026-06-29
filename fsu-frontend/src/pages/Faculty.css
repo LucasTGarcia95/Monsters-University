@@ -1,13 +1,16 @@
 .faculty-list-page {
   padding: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .faculty-list-page h1 {
-  color: #4a0e8f;
+  color: #1a3a6b;
+  margin-bottom: 0.5rem;
 }
 
 .page-subtitle {
-  color: #333;
+  color: #666;
   margin-bottom: 2rem;
 }
 
@@ -22,18 +25,21 @@
   text-decoration: none;
   color: #333;
   background-color: white;
-  border: 1px solid #4a0e8f;
+  border: 1px solid #1a3a6b;
   border-radius: 6px;
   padding: 1rem 2rem;
   text-align: center;
   flex: 1 1 220px;
   max-width: 260px;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  border-top: 4px solid #1a3a6b;
 }
 
 .faculty-card:hover {
-  background-color: #f4d03f;
-  border-color: #f4d03f;
+  background-color: #f4c430;
+  border-color: #f4c430;
 }
 
 .faculty-card-image {
@@ -46,7 +52,7 @@
 
 .faculty-card h3 {
   margin: 0.25rem 0;
-  color: #4a0e8f;
+  color: #1a3a6b;
   font-size: 1.1rem;
 }
 
@@ -56,19 +62,6 @@
   margin: 0 auto;
 }
 
-.back-link {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  color: #4a0e8f;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-.back-link:hover {
-  color: #f4d03f;
-  text-decoration: underline;
-}
-
 .faculty-detail-header {
   display: flex;
   gap: 1.5rem;
@@ -76,8 +69,9 @@
   margin-bottom: 2rem;
   padding: 1rem 2rem;
   background-color: white;
-  border: 1px solid #4a0e8f;
+  border: 1px solid #1a3a6b;
   border-radius: 6px;
+  border-top: 4px solid #1a3a6b;
 }
 
 .faculty-detail-image {
@@ -88,7 +82,7 @@
 }
 
 .faculty-detail-header h1 {
-  color: #4a0e8f;
+  color: #1a3a6b;
   margin-bottom: 0.5rem;
 }
 
@@ -97,13 +91,13 @@
 }
 
 .faculty-detail-department a {
-  color: #4a0e8f;
+  color: #1a3a6b;
   font-weight: bold;
   text-decoration: none;
 }
 
 .faculty-detail-department a:hover {
-  color: #f4d03f;
+  color: #4a9eda;
   text-decoration: underline;
 }
 
@@ -115,12 +109,13 @@
 .faculty-detail-bio {
   padding: 1rem 2rem;
   background-color: white;
-  border: 1px solid #4a0e8f;
+  border: 1px solid #1a3a6b;
   border-radius: 6px;
+  border-top: 4px solid #4a9eda;
 }
 
 .faculty-detail-bio h2 {
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
-  color: #4a0e8f;
+  color: #1a3a6b;
 }

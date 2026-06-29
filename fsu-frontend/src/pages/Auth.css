@@ -14,10 +14,11 @@
   width: 100%;
   max-width: 450px;
   text-align: center;
+  border-top: 4px solid #1a3a6b;
 }
 
 .auth-card h1 {
-  color: #4a0e8f;
+  color: #1a3a6b;
   margin-bottom: 0.5rem;
   font-size: 1.75rem;
   white-space: nowrap;
@@ -56,11 +57,11 @@
 
 .auth-field input:focus {
   outline: none;
-  border-color: #4a0e8f;
+  border-color: #1a3a6b;
 }
 
 .auth-button {
-  background-color: #4a0e8f;
+  background-color: #1a3a6b;
   color: white;
   border: none;
   padding: 0.75rem;
@@ -71,7 +72,7 @@
 }
 
 .auth-button:hover {
-  background-color: #6a1fbf;
+  background-color: #2a5298;
 }
 
 .auth-error {
@@ -86,7 +87,7 @@
 }
 
 .auth-switch a {
-  color: #4a0e8f;
+  color: #1a3a6b;
   text-decoration: none;
   font-weight: bold;
 }

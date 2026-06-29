@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import muLogo from "../assets/mu-logo.png";
 import "./Home.css";
 
 function Home() {
@@ -6,7 +7,12 @@ function Home() {
     <div className="home-container">
       <section className="hero">
         <div className="hero-content">
-          <h1>👾 Welcome to Monsters University</h1>
+          <img
+            src={muLogo}
+            alt="Monsters University Logo"
+            className="hero-logo"
+          />
+          <h1>Welcome to Monsters University</h1>
           <p className="hero-subtitle">We scare because we care.</p>
           <p className="hero-description">
             Monsters University is the premier institution for monsters seeking
