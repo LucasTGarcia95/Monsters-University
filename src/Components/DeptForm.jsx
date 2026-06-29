@@ -1,8 +1,11 @@
+import { useState } from "react";
+
 export function DeptForm({ initial = {}, onSave, onCancel, loading }) {
   const [form, setForm] = useState({
     name: initial.name || "",
     description: initial.description || "",
-    bannerImage: initial.bannerImage || "",
+    banner_image_url: initial.banner_image_url || "",
+    contact_info: initial.contact_info || "",
   });
 
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
@@ -33,9 +36,16 @@ export function DeptForm({ initial = {}, onSave, onCancel, loading }) {
       <label className="label">Banner image URL</label>
       <input
         className="input"
-        value={form.bannerImage}
-        onChange={set("bannerImage")}
+        value={form.banner_image_url}
+        onChange={set("banner_image_url")}
         placeholder="https://…"
+      />
+      <label className="label">Contact info</label>
+      <input
+        className="input"
+        value={form.contact_info}
+        onChange={set("contact_info")}
+        placeholder="e.g. room 101, ext. 2345"
       />
       <div className="form-row">
         <button type="button" className="btn btn-ghost" onClick={onCancel}>
