@@ -1,0 +1,126 @@
+.faculty-list-page {
+  padding: 2rem;
+}
+
+.faculty-list-page h1 {
+  color: #4a0e8f;
+}
+
+.page-subtitle {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.faculty-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.faculty-card {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  background-color: white;
+  border: 1px solid #4a0e8f;
+  border-radius: 6px;
+  padding: 1rem 2rem;
+  text-align: center;
+  flex: 1 1 220px;
+  max-width: 260px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.faculty-card:hover {
+  background-color: #f4d03f;
+  border-color: #f4d03f;
+}
+
+.faculty-card-image {
+  width: 100%;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+
+.faculty-card h3 {
+  margin: 0.25rem 0;
+  color: #4a0e8f;
+  font-size: 1.1rem;
+}
+
+.faculty-detail-page {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #4a0e8f;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.back-link:hover {
+  color: #f4d03f;
+  text-decoration: underline;
+}
+
+.faculty-detail-header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 1rem 2rem;
+  background-color: white;
+  border: 1px solid #4a0e8f;
+  border-radius: 6px;
+}
+
+.faculty-detail-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.faculty-detail-header h1 {
+  color: #4a0e8f;
+  margin-bottom: 0.5rem;
+}
+
+.faculty-detail-department {
+  color: #333;
+}
+
+.faculty-detail-department a {
+  color: #4a0e8f;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.faculty-detail-department a:hover {
+  color: #f4d03f;
+  text-decoration: underline;
+}
+
+.faculty-detail-contact {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.faculty-detail-bio {
+  padding: 1rem 2rem;
+  background-color: white;
+  border: 1px solid #4a0e8f;
+  border-radius: 6px;
+}
+
+.faculty-detail-bio h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #4a0e8f;
+}
