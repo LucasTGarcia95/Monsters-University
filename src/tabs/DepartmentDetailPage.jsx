@@ -4,17 +4,18 @@ import { Spinner } from "../Components/Spinner";
 import { ConfirmDialog } from "../Components/ConfirmDialogue";
 import { DeptForm } from "../Components/DeptForm";
 import { useAuth } from "../auth/AuthContext";
-
-const [loading, setLoading] = useState(true);
-const [showEdit, setShowEdit] = useState(false);
-const [showDelete, setShowDelete] = useState(false);
-const [saving, setSaving] = useState(false);
+import { api } from "../api";
 
 export default function DepartmentDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { token } = useAuth();
+  const { isAdmin } = useAuth();
   const [dept, setDept] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     api.departments
@@ -54,38 +55,31 @@ export default function DepartmentDetailsPage() {
 
   return (
     <div className="page page--detail">
-      Banner
       <div
         className="detail-banner"
         style={{
-          backgroundImage: dept.bannerImage
-            ? `url(${dept.bannerImage})`
+          backgroundImage: dept.banner_image_url
+            ? `url(${dept.banner_image_url})`
             : undefined,
         }}
       >
         <div className="detail-banner-overlay">
           <Link to="/departments" className="back-link">
-            ← Departments
+            Departments
           </Link>
           <h1 className="detail-title">{dept.name}</h1>
-          <div className="detail-meta">
-            {dept.founded && <span>Founded {dept.founded}</span>}
-            {dept.students && (
-              <span>🎓 {dept.students.toLocaleString()} students</span>
-            )}
-          </div>
         </div>
       </div>
+
       <div className="detail-body">
-        Admin controls
-        {token && (
+        {isAdmin && (
           <div className="admin-bar">
             <span className="admin-badge">Admin mode</span>
             <button
               className="btn btn-ghost btn-sm"
               onClick={() => setShowEdit(true)}
             >
-              Edit department
+              Edit
             </button>
             <button
               className="btn btn-danger btn-sm"
@@ -95,48 +89,36 @@ export default function DepartmentDetailsPage() {
             </button>
           </div>
         )}
-        About
+
         <section className="detail-section">
           <h2 className="section-title">About</h2>
           <p className="section-body">{dept.description}</p>
         </section>
-        Gallery
-        {dept.images?.length > 0 && (
-          <section className="detail-section">
-            <h2 className="section-title">Gallery</h2>
-            <div className="gallery">
-              {dept.images.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt={`${dept.name} ${i + 1}`}
-                  className="gallery-img"
-                />
-              ))}
-            </div>
-          </section>
-        )}
-        Contact
-        {dept.contact && (
+
+        {dept.contact_info && (
           <section className="detail-section">
             <h2 className="section-title">Contact</h2>
-            <div className="contact-grid">
-              <ContactItem
-                label="Email"
-                value={dept.contact.email}
-                href={`mailto:${dept.contact.email}`}
-              />
-              <ContactItem
-                label="Phone"
-                value={dept.contact.phone}
-                href={`tel:${dept.contact.phone}`}
-              />
-              <ContactItem label="Office" value={dept.contact.office} />
-              <ContactItem label="Hours" value={dept.contact.hours} />
-            </div>
+            <p className="section-body">{dept.contact_info}</p>
+          </section>
+        )}
+
+        {dept.faculty?.length > 0 && (
+          <section className="detail-section">
+            <h2 className="section-title">Faculty</h2>
+            <ul className="faculty-list">
+              {dept.faculty.map((member) => (
+                <li key={member.id} className="faculty-item">
+                  <span className="faculty-name">{member.name}</span>
+                  {member.title && (
+                    <span className="faculty-title">{member.title}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
           </section>
         )}
       </div>
+
       {showEdit && (
         <div className="modal-backdrop" onClick={() => setShowEdit(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -150,6 +132,7 @@ export default function DepartmentDetailsPage() {
           </div>
         </div>
       )}
+
       {showDelete && (
         <ConfirmDialog
           title="Delete department"
@@ -158,24 +141,6 @@ export default function DepartmentDetailsPage() {
           onCancel={() => setShowDelete(false)}
         />
       )}
-    </div>
-  );
-}
-
-function ContactItem({ icon, label, value, href }) {
-  return (
-    <div className="contact-item">
-      <span className="contact-icon">{icon}</span>
-      <div>
-        <div className="contact-label">{label}</div>
-        {href ? (
-          <a href={href} className="contact-value link">
-            {value}
-          </a>
-        ) : (
-          <div className="contact-value">{value}</div>
-        )}
-      </div>
     </div>
   );
 }
